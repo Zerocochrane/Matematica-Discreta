@@ -22,10 +22,17 @@ def uniao(conjunto1, conjunto2):
     return resultado
 
 
+def subtracao(conjunto1, conjunto2):
+    resultado = []
+    for i in range(len(conjunto1)):
+        if not pertence(conjunto2, conjunto1[i]):
+            resultado.append(conjunto1[i])
+    return resultado
+
 def intersecao(conjunto1, conjunto2):
     resultado = []
     for i in range(len(conjunto1)):
-        if pertence(conjunto2, conjunto1[i]):
+        if not pertence(conjunto2, conjunto1[i]):
             resultado.append(conjunto1[i])
     return resultado
 
@@ -39,6 +46,17 @@ def produtoCartesiano(conjunto1, conjunto2):
             aux.append(conjunto2[j])
             resultado.append(aux)
     return resultado
+
+
+def produtoCartesianoReverso(conjunto):
+    conjuntoA = []
+    conjuntoB = []
+    for i in range(len(conjunto)):
+        if not pertence(conjuntoA, conjunto[i][0]):
+            conjuntoA.append(conjunto[i][0])
+        if not pertence(conjuntoB, conjunto[i][1]):
+            conjuntoB.append(conjunto[i][1])
+    return conjuntoA, conjuntoB
 
 
 def combinacao(conjunto, tamanho):
@@ -59,6 +77,16 @@ def conjuntoDasPartes(conjunto):
         conjuntao.extend(combinacao(conjunto, len(conjunto) - i))
     conjuntao.extend([[]])
     return conjuntao
+
+def conuntoDasPartesReverso(conjuntao):
+    conjunto = []
+    tamanho = 0
+    aux = 0
+    for i in conjuntao:
+        if len(i) > tamanho:
+            tamanho = len(i)
+            aux = i
+    return aux
 
 
 escolha = input("Digite 1 para ler um arquivo ou 2 para entrar os elementos de um conjunto manualmente: ")
@@ -102,6 +130,11 @@ print(uniao(conjunto1, conjunto2))
 
 print("")
 print("")
+print("Realizando a Subtração entre o Conjunto 1 e o Conjunto 2")
+print(subtracao(conjunto1, conjunto2))
+
+print("")
+print("")
 print("Realizando a Interseçao entre o Conjunto 1 e o Conjunto 2")
 print(intersecao(conjunto1, conjunto2))
 
@@ -112,5 +145,15 @@ print(produtoCartesiano(conjunto1, conjunto2))
 
 print("")
 print("")
+print("Realizando o Produto Cartesiano Reverso entre o Conjunto 1 e o Conjunto 2")
+print(produtoCartesianoReverso(produtoCartesiano(conjunto1, conjunto2)))
+
+print("")
+print("")
 print("Realizando o Conjunto das Partes do Conjunto 2")
-print(conjuntoDasPartes(conjunto2))
+print(conjuntoDasPartes(conjunto1))
+
+print("")
+print("")
+print("Realizando o Conjunto das Partes reverso do Conjunto 2")
+print(conuntoDasPartesReverso(conjuntoDasPartes(conjunto2)))
