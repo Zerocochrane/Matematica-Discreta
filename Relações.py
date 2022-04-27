@@ -43,15 +43,26 @@ def imprimirMatriz(matriz):
         print(coluna)
 
 
-with open('inputRelação.txt') as file:
-    lines = file.readlines()
-    conjunto1 = lines[0].split()
-    conjunto2 = lines[1].split()
-    conjunto3 = lines[2].split()
-
-
-n = 2
-m = 3
+escolha = input("Digite 1 para ler um arquivo ou 2 para entrar os elementos de um conjunto manualmente: ")
+if escolha == '1':
+    with open('inputRelação.txt') as file:
+        lines = file.readlines()
+        conjunto1 = lines[0].split()
+        conjunto2 = lines[1].split()
+        conjunto3 = lines[2].split()
+        n = lines[3].split()
+        n = int(n[0])
+        m = lines[4].split()
+        m =int(m[0])
+elif escolha == '2':
+    aux = input("Digite o primeiro conjunto: ")
+    conjunto1 = aux.split()
+    aux = input("Digite o segundo conjunto: ")
+    conjunto2 = aux.split()
+    aux = input("Digite o terceiro conjunto: ")
+    conjunto3 = aux.split()
+    n = int(input("Digite quantas relações entre o primeiro e o segundo conjuntos: "))
+    m = int(input("Digite quantas relações entre o segundo e o terceiro conjuntos: "))
 
 relacaoAB, matrizAB = criarPar(conjunto1, conjunto2, n)
 relacaoBC, matrizBC  = criarPar(conjunto2, conjunto3, m)
