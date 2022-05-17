@@ -1,4 +1,7 @@
-def igualdade(conjuntoA, conjuntoB):
+from operator import eq, le, lt, ge, gt
+
+
+def comparacao(conjuntoA, conjuntoB, operator):
     matriz = []
 
     for i in range(len(conjuntoA)):
@@ -8,7 +11,7 @@ def igualdade(conjuntoA, conjuntoB):
         matriz.append(aux1)
     for i in range(len(conjuntoA)):
         for j in range(len(conjuntoB)):
-            if conjuntoA[i] == conjuntoB[j]:
+            if operator(conjuntoA[i], conjuntoB[j]):
                 matriz[i][j] = 1
 
     return matriz
@@ -33,16 +36,45 @@ def imprimirMatriz(matriz):
 
 
 with open('inputRelacao.txt') as file:
+    escolha = 1
     lines = file.readlines()
     conjunto1 = lines[0].split()
     conjunto2 = lines[1].split()
     conjunto3 = lines[2].split()
+while escolha != '-1':
+    escolha = input("Digite qual relacao deseja verificar: ")
 
-escolha = input("Digite qual relacao deseja verificar: ")
+    if escolha == '=':
+        matrizAB = comparacao(conjunto1, conjunto2, eq)
+        matrizBC = comparacao(conjunto2, conjunto3, eq)
+        resultado = relacaoComposta(matrizAB, matrizBC)
+        print("Imprimindo matriz resultado:")
+        imprimirMatriz(resultado)
 
-if escolha == '=':
-    matrizAB = igualdade(conjunto1, conjunto2)
-    matrizBC = igualdade(conjunto2, conjunto3)
-    resultado = relacaoComposta(matrizAB,matrizBC)
+    if escolha == '>':
+        matrizAB = comparacao(conjunto1, conjunto2, gt)
+        matrizBC = comparacao(conjunto2, conjunto3, gt)
+        resultado = relacaoComposta(matrizAB, matrizBC)
+        print("Imprimindo matriz resultado:")
+        imprimirMatriz(resultado)
 
-    imprimirMatriz(resultado)
+    if escolha == '<':
+        matrizAB = comparacao(conjunto1, conjunto2, lt)
+        matrizBC = comparacao(conjunto2, conjunto3, lt)
+        resultado = relacaoComposta(matrizAB, matrizBC)
+        print("Imprimindo matriz resultado:")
+        imprimirMatriz(resultado)
+
+    if escolha == '=>':
+        matrizAB = comparacao(conjunto1, conjunto2, ge)
+        matrizBC = comparacao(conjunto2, conjunto3, ge)
+        resultado = relacaoComposta(matrizAB, matrizBC)
+        print("Imprimindo matriz resultado:")
+        imprimirMatriz(resultado)
+
+    if escolha == '=<':
+        matrizAB = comparacao(conjunto1, conjunto2, le)
+        matrizBC = comparacao(conjunto2, conjunto3, le)
+        resultado = relacaoComposta(matrizAB, matrizBC)
+        print("Imprimindo matriz resultado:")
+        imprimirMatriz(resultado)
